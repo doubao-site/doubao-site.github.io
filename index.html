@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>豆包 - 豆包AI网页版官网入口</title>
+    <meta name="keywords" content="豆包,豆包AI网页版,字节跳动AI,智能助手,AI对话,AI写作,AI翻译,AI编程,豆包官网">
+    <meta name="description" content="豆包是字节跳动推出的智能AI助手，提供对话、写作、翻译、编程等多场景服务。支持语音交流、图像识别、文档解读等能力，网页版、桌面版、移动端全覆盖，免费体验前沿AI技术。">
+    <link rel="shortcut icon" href="https://lf-flow-web-cdn.doubao.com/obj/flow-doubao/samantha/logo-icon-white-bg.png" />
+    <link rel="preconnect" href="https://cdn.bootcdn.net">
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- 内联基础样式 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: rgb(241 245 249);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 20px;
+        }
+        
+        .logo img {
+            height: 40px;
+        }
+        
+        .nav-list {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: #0066ff;
+        }
+        
+        /* 英雄区域 */
+        .hero {
+            padding: 4rem 0;
+            background: #fff;
+            color: black;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .hero-title-box {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .img-box img {
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+            border: 1px solid #e5e7eb;
+            background: white;
+            padding: 8px;
+        }
+        
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            background: #111;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align:left;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .hero-desc {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size:1.5rem;
+            justify-content:center;
+        }
+        
+        .btn-primary {
+            background: #8b3dff;
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #0066ff;
+            border: 1px solid #0066ff;
+        }
+        
+        .btn-secondary:hover {
+            background: #f0f7ff;
+            transform: translateY(-2px);
+        }
+        
+        .hero-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius:20px;
+            border: 1px solid #e5e7eb;
+            padding: 5px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* 功能区域 */
+        .section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1e3c72;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #1e3c72;
+        }
+        
+        .feature-title i {
+            color: #0066ff;
+            margin-right: 0.5rem;
+        }
+        
+        /* 优势区域 */
+        .advantages-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        .advantage-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid #e5e7eb;
+
+        }
+        
+        .advantage-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #1e3c72;
+        }
+        
+        /* FAQ区域 */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .faq-toggle {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .faq-toggle:hover {
+            background: #f8f9fa;
+        }
+        
+        .faq-content {
+            padding: 0 1.5rem 1.5rem;
+            display: none;
+            color: #666;
+        }
+        
+        .faq-content.active {
+            display: block;
+        }
+        
+        /* 新闻区域 */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .news-content {
+            padding: 1.5rem;
+        }
+        
+        .news-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #1e3c72;
+        }
+        
+        .news-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* 返回顶部 */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #0066ff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+        }
+        
+        .back-to-top:hover {
+            transform: scale(1.1);
+        }
+        
+        .back-to-top.show {
+            display: flex;
+        }
+        
+        /* 页脚 */
+        .footer {
+            background: #fff;
+            color: #555;
+            text-align: center;
+            padding: 2rem 0;
+        }
+        
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .nav-list {
+                display: none;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            .btn{
+                width: 100%;
+            }
+        }
+        
+        /* 平台图标样式 */
+        .platform-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .platform-icon {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #f0f7ff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+        
+        .platform-icon i {
+            color: #0066ff;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="./logo.png" alt="Logo" />
+            </div>
+            <nav class="nav" aria-label="主导航">
+                <ul class="nav-list">
+                    <li><a href="#features" class="nav-link">核心能力</a></li>
+                    <li><a href="#advantages" class="nav-link">产品优势</a></li>
+                    <li><a href="#faq" class="nav-link">常见问题</a></li>
+                    <li><a href="#news" class="nav-link">最新动态</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <div class="hero-title-box">
+                        <div class="img-box">
+                            <img src="https://lf-flow-web-cdn.doubao.com/obj/flow-doubao/samantha/logo-icon-white-bg.png" alt="豆包" />
+                        </div>
+                        <div>
+                            <h1 class="hero-title">豆包</h1>
+                            <p class="hero-subtitle">字节跳动旗下 AI 智能助手</p>
+                        </div>
+                    </div>
+                    <p class="hero-desc">
+                        多场景AI助手，支持对话、写作、翻译、编程；语音交流、图像识别、文档解读等，全平台免费在线使用
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="https://ai.iitab.link/" 
+                           class="btn btn-primary" 
+                           rel="nofollow" 
+                           target="_blank"
+                           aria-label="访问豆包官网">
+                           <i class="fas fa-external-link-alt"></i>豆包网页版入口
+                        </a>
+                        <a href="https://ugapk.com/daR3r" class="btn btn-secondary">
+                            <i class="fas fa-rocket"></i>豆包电脑版下载
+                        </a>
+                    </div>
+
+                </div>
+                <div class="hero-image-container">
+                    <img src="./doubao.webp" alt="豆包官网" class="hero-image">
+                </div>
+            </div>
+        </section>
+
+        <!-- 核心能力部分 -->
+        <section id="features" class="section features">
+            <div class="container">
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 class="feature-title">
+                            <i class="fas fa-comments"></i>
+                            多轮对话与问答
+                        </h3>
+                        <p>基于豆包大模型，支持上下文理解的自然对话。无论是日常闲聊、知识问答还是专业咨询，都能给出准确、流畅的回应，支持中英文混合交流。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">
+                            <i class="fas fa-pen-fancy"></i>
+                            智能写作辅助
+                        </h3>
+                        <p>覆盖文案创作、邮件撰写、社交媒体、学术论文等多种写作场景。支持风格定制、内容扩写、摘要生成和语法优化，提升创作效率与质量。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">
+                            <i class="fas fa-language"></i>
+                            多语言翻译与润色
+                        </h3>
+                        <p>豆包支持中文、英文、日文、韩文等数十种语言的互译，特别优化商务、技术和文学翻译场景。同时提供文本润色服务，让表达更地道专业。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">
+                            <i class="fas fa-code"></i>
+                            编程代码助手
+                        </h3>
+                        <p>提供Python、JavaScript、Java、Go等主流语言的代码编写、调试和解释服务。支持算法设计、Bug修复、代码审查，帮助开发者提升效率。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">
+                            <i class="fas fa-image"></i>
+                            多模态理解能力
+                        </h3>
+                        <p>支持图像识别与分析，可识别图片中的文字、物体和场景。支持PDF、Word等文档解析，快速提取关键信息并生成摘要。</p>
+                    </div>
+                    <div class="feature-card">
+                        <h3 class="feature-title">
+                            <i class="fas fa-bolt"></i>
+                            语音交互与播报
+                        </h3>
+                        <p>豆包内置语音识别和合成技术，支持语音输入和朗读回复。提供多种音色选择，在驾驶、家务等场景下实现免提操作。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 产品优势部分 -->
+        <section id="advantages" class="section advantages">
+            <div class="container">
+                <h2 class="section-title">豆包产品优势</h2>
+                <div class="advantages-list">
+                    <div class="advantage-item">
+                        <h3 class="advantage-title">字节跳动大模型技术支撑</h3>
+                        <p>基于字节跳动自研豆包大模型，整合最新研究成果，在理解精度、响应速度和生成质量上表现优异。模型持续迭代升级，确保用户始终享受前沿AI能力。</p>
+                    </div>
+                    <div class="advantage-item">
+                        <h3 class="advantage-title">真正免费无限制使用</h3>
+                        <p>豆包对个人用户完全免费开放，不设置使用频次或功能限制。无需订阅或付费解锁，所有核心功能均可自由体验，降低AI技术使用门槛。</p>
+                    </div>
+                    <div class="advantage-item">
+                        <h3 class="advantage-title">全平台无缝覆盖</h3>
+                        <p>提供网页版、Windows/macOS桌面客户端、iOS/Android移动端，账号数据实时同步。支持浏览器插件，随时随地调用AI能力。</p>
+                    </div>
+                    <div class="advantage-item">
+                        <h3 class="advantage-title">中文场景深度优化</h3>
+                        <p>针对中文表达习惯和文化背景专门训练，在成语理解、古诗词分析、现代流行语等场景表现更自然。支持方言识别和地域性知识问答。</p>
+                    </div>
+                    <div class="advantage-item">
+                        <h3 class="advantage-title">实时联网信息获取</h3>
+                        <p>集成搜索引擎能力，可获取最新资讯和实时信息。无论是新闻时事、股市行情还是影视动态，都能提供准确及时的内容。</p>
+                    </div>
+                    <div class="advantage-item">
+                        <h3 class="advantage-title">隐私保护与数据安全</h3>
+                        <p>采用端到端加密技术，对话内容严格保密。用户可随时删除历史记录，个人信息不用于模型训练，符合国内数据安全合规要求。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ部分 -->
+        <section id="faq" class="section faq">
+            <div class="container">
+                <h2 class="section-title">常见问题解答</h2>
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-toggle" aria-expanded="false" aria-controls="faq1-content">
+                            <span>豆包真的是完全免费的吗？</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-content" id="faq1-content">
+                            <p>是的，豆包对个人用户完全免费开放。无论是对话、写作、翻译还是编程功能，都不设使用限制。字节跳动希望通过免费模式，让更多用户体验到AI技术的价值。企业用户如有定制化需求，可联系商务团队洽谈合作。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-toggle" aria-expanded="false" aria-controls="faq2-content">
+                            <span>豆包与扣子空间有什么区别？</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-content" id="faq2-content">
+                            <p>豆包是面向普通用户的AI助手产品，直接使用即可。扣子空间则是面向开发者的AI机器人创作平台，可以定制专属Bot。简单来说，豆包是"开箱即用"的AI工具，扣子空间是"自己动手做AI"的开发环境。两者都是字节跳动AI生态的重要组成部分。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-toggle" aria-expanded="false" aria-controls="faq3-content">
+                            <span>豆包支持哪些使用方式？</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-content" id="faq3-content">
+                            <p>豆包提供网页版(doubao.com)、桌面客户端(Windows/macOS)、移动APP(iOS/Android)和浏览器插件。各端数据自动同步，可根据场景选择最便捷的方式。网页版无需安装打开即用，客户端支持快捷键唤醒，移动端适合随身使用。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-toggle" aria-expanded="false" aria-controls="faq4-content">
+                            <span>豆包的回答准确性如何？</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-content" id="faq4-content">
+                            <p>豆包基于大语言模型生成内容，在大多数场景下准确可靠，但可能存在事实性错误。建议对专业领域信息进行二次确认。豆包已集成联网搜索功能，对时效性信息会主动查证。用户可通过"拇指向上/向下"反馈帮助模型持续改进。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-toggle" aria-expanded="false" aria-controls="faq5-content">
+                            <span>我的对话记录会被保存吗？</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-content" id="faq5-content">
+                            <p>豆包会保存您的对话历史以便继续交流，但您可随时在设置中删除单条或全部记录。所有对话数据经过加密存储，不会用于商业用途或模型训练。您也可以在隐私设置中选择自动清除周期，或开启无痕模式让对话不保留记录。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 最新动态部分 -->
+        <section id="news" class="section news">
+            <div class="container">
+                <h2 class="section-title">豆包最新动态</h2>
+                <div class="news-grid">
+                    <article class="news-card">
+                        <div class="news-content">
+                            <h3 class="news-title">豆包日活用户数突破1亿，成为国内首个亿级AI原生应用</h3>
+                            <div class="news-date">
+                                <i class="fas fa-calendar"></i>
+                                <time datetime="2025-12-24">2025年12月24日</time>
+                            </div>
+                            <p>QuestMobile最新报告显示，豆包APP日活跃用户数已突破1亿大关，成为国内用户规模最大的AIGC应用。值得注意的是，豆包也是字节跳动历史上获客成本最低的亿级DAU产品。</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-content">
+                            <h3 class="news-title">火山引擎携豆包成为2026年央视春晚独家AI合作伙伴</h3>
+                            <div class="news-date">
+                                <i class="fas fa-calendar"></i>
+                                <time datetime="2025-12-23">2025年12月23日</time>
+                            </div>
+                            <p>字节跳动旗下火山引擎正式签约成为2026年总台春晚独家AI云合作伙伴，豆包将作为核心互动产品深度参与春晚，推出多种AI互动玩法。这是AI应用首次登上春晚舞台。</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-content">
+                            <h3 class="news-title">豆包手机第二代启动研发，预计2026年底上市</h3>
+                            <div class="news-date">
+                                <i class="fas fa-calendar"></i>
+                                <time datetime="2025-12-04">2025年12月4日</time>
+                            </div>
+                            <p>供应链消息显示，豆包与中兴通讯合作的第一代手机因工程样机数量稀少已宣告售罄，项目方未追加生产。双方已启动第二代产品研发，预计2026年底正式出货，届时将与更多手机厂商展开生态合作。</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-content">
+                            <h3 class="news-title">豆包AI原生应用周活跃用户规模持续领跑行业</h3>
+                            <div class="news-date">
+                                <i class="fas fa-calendar"></i>
+                                <time datetime="2025-12-20">2025年12月20日</time>
+                            </div>
+                            <p>根据第三方数据平台监测，豆包在AI原生应用周活跃用户榜单中稳居首位，领先于DeepSeek、元宝等产品。通用AI应用已形成市场主导地位，豆包的用户粘性表现尤为突出。</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-content">
+                            <h3 class="news-title">豆包视频理解功能内测上线，支持多模态交互</h3>
+                            <div class="news-date">
+                                <i class="fas fa-calendar"></i>
+                                <time datetime="2025-12-18">2025年12月18日</time>
+                            </div>
+                            <p>豆包近期开放视频理解功能内测，用户上传视频后AI可自动识别画面内容、提取关键信息并回答相关问题。该功能在教育和内容创作场景展现出巨大潜力。</p>
+                        </div>
+                    </article>
+                    <article class="news-card">
+                        <div class="news-content">
+                            <h3 class="news-title">豆包与多家手机厂商洽谈预装合作，拓展生态布局</h3>
+                            <div class="news-date">
+                                <i class="fas fa-calendar"></i>
+                                <time datetime="2025-12-15">2025年12月15日</time>
+                            </div>
+                            <p>豆包团队正与vivo、联想、传音等主流手机厂商深入洽谈，计划通过预装AIGC插件形式将豆包助手整合进更多品牌机型。目前联想"天禧AI"已可选配豆包Agent问答服务。</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="copyright">
+                <p>豆包(Doubao) - 字节跳动AI智能助手</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">&copy; 2025 doubao-site.github.io</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ交互功能
+        document.querySelectorAll('.faq-toggle').forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const content = toggle.nextElementSibling;
+                const icon = toggle.querySelector('i');
+                
+                content.classList.toggle('active');
+                if (content.classList.contains('active')) {
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    icon.style.transform = 'rotate(0)';
+                }
+            });
+        });
+        
+        // 返回顶部按钮
+        const backToTopBtn = document.createElement('button');
+        backToTopBtn.className = 'back-to-top';
+        backToTopBtn.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        document.body.appendChild(backToTopBtn);
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
